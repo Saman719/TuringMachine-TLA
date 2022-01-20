@@ -22,6 +22,13 @@ class TuringMachineManager {
   }
 
   void start() {
-    while (true) {}
+    while (true) {
+      for (var rule in rules) {
+        if (currentState == rule.qFrom && tape[head] == rule.currentSymbol) {
+          currentState = rule.qTo;
+          rule.direction == true ? head++ : head--;
+        }
+      }
+    }
   }
 }

@@ -1,7 +1,7 @@
 class Rule {
   String qFrom, qTo;
   String currentSymbol, replaceSymbol;
-  bool direction;
+  bool direction; // true -> RIGHT MOVE , false -> LEFT MOVE
 
   Rule(
       {required this.qFrom,
