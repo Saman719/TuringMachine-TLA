@@ -76,7 +76,9 @@ class _InputPageState extends State<InputPage> {
                 ),
               ),
               Container(
-                height: MediaQuery.of(context).size.height - 400,
+                padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                decoration: BoxDecoration(border: Border.all()),
+                height: MediaQuery.of(context).size.height - 239,
                 child: GridView.count(
                   childAspectRatio: 4,
                   padding: EdgeInsets.zero,
