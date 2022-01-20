@@ -6,14 +6,15 @@ class TuringMachineManager {
   int head = 0;
   String startState;
   late String currentState;
-  List<String> finalStates;
+  String finalState;
   late List<String> tape = [];
+  bool accept = false;
 
   TuringMachineManager(
       {required this.rules,
       required this.w,
       required this.startState,
-      required this.finalStates}) {
+      required this.finalState}) {
     w = w.trim(); // if any white space is in string for any reason
     currentState = startState;
     w.runes.forEach((element) {
@@ -23,11 +24,22 @@ class TuringMachineManager {
 
   void start() {
     while (true) {
+      var rejected = true;
       for (var rule in rules) {
         if (currentState == rule.qFrom && tape[head] == rule.currentSymbol) {
+          rejected = false;
           currentState = rule.qTo;
+          tape[head] = rule.replaceSymbol;
           rule.direction == true ? head++ : head--;
         }
+        if (currentState == finalState) {
+          accept = true;
+          return;
+        }
+      }
+      if (rejected) {
+        accept = false;
+        return;
       }
     }
   }
