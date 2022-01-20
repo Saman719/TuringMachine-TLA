@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:turing_machine/screen/input_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -9,6 +10,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return const MaterialApp(
+      home: Scaffold(
+        body: InputPage(),
+      ),
+      debugShowCheckedModeBanner: false,
+    );
   }
 }
