@@ -19,10 +19,12 @@ class TuringMachineManager {
     currentState = startState;
     w.runes.forEach((element) {
       tape.add(String.fromCharCode(element));
+      tape.add("BLANK");
+      tape.add("BLANK");
     });
   }
 
-  void start() {
+  bool start() {
     while (true) {
       var rejected = true;
       for (var rule in rules) {
@@ -34,12 +36,12 @@ class TuringMachineManager {
         }
         if (currentState == finalState) {
           accept = true;
-          return;
+          return accept;
         }
       }
       if (rejected) {
         accept = false;
-        return;
+        return accept;
       }
     }
   }

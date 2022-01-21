@@ -10,7 +10,7 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  late final TuringMachineManager turingMachineManager;
+  late TuringMachineManager turingMachineManager;
   final stringController = TextEditingController();
   final startStateController = TextEditingController();
   final finalStateController = TextEditingController();
@@ -18,7 +18,7 @@ class _InputPageState extends State<InputPage> {
   List<Widget> ruleInputs = [RuleInput(), RuleInput()];
   void addRuleInputs() {
     setState(() {
-      ruleInputs.add(RuleInput());
+      ruleInputs.add(RuleInput()..currentSymbolController);
     });
   }
 
@@ -238,10 +238,10 @@ class _RuleInputState extends State<RuleInput> {
   }
 }
 
-List<Rule> extraxtRules(List<Widget> widgetInputs) {
-  List<RuleInput> ruleInputs = widgetInputs as List<RuleInput>;
+List<Rule> extraxtRules(List<Widget> ruleInputs) {
   List<Rule> rules = [];
   for (var ruleInput in ruleInputs) {
+    ruleInput = (ruleInput as RuleInput);
     if (ruleInput.fromController.text == null ||
         ruleInput.fromController.text == "") {
       continue;
