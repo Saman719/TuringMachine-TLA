@@ -23,7 +23,13 @@ class _InputPageState extends State<InputPage> {
   }
 
   void startProcess() {
-    List<Rule> rules = extraxtRules(ruleInputs);
+    turingMachineManager = TuringMachineManager(
+        rules: extraxtRules(ruleInputs),
+        w: stringController.text,
+        startState: startStateController.text,
+        finalState: finalStateController.text);
+    turingMachineManager.start();
+    print(turingMachineManager.accept);
   }
 
   @override
@@ -143,6 +149,8 @@ class _RuleInputState extends State<RuleInput> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      decoration: const BoxDecoration(
+          border: Border(right: BorderSide(color: Colors.black, width: 1))),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -233,6 +241,19 @@ class _RuleInputState extends State<RuleInput> {
 List<Rule> extraxtRules(List<Widget> widgetInputs) {
   List<RuleInput> ruleInputs = widgetInputs as List<RuleInput>;
   List<Rule> rules = [];
-
+  for (var ruleInput in ruleInputs) {
+    if (ruleInput.fromController.text == null ||
+        ruleInput.fromController.text == "") {
+      continue;
+    }
+    Rule rule = Rule(
+      qFrom: ruleInput.fromController.text,
+      qTo: ruleInput.toController.text,
+      currentSymbol: ruleInput.currentSymbolController.text,
+      replaceSymbol: ruleInput.replaceSymbolController.text,
+      direction: ruleInput.directionController.text == "R" ? true : false,
+    );
+    rules.add(rule);
+  }
   return rules;
 }
