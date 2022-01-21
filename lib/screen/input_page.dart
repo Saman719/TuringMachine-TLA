@@ -14,6 +14,7 @@ class _InputPageState extends State<InputPage> {
   final stringController = TextEditingController();
   final startStateController = TextEditingController();
   final finalStateController = TextEditingController();
+  bool accept = false;
 
   List<Widget> ruleInputs = [RuleInput(), RuleInput()];
   void addRuleInputs() {
@@ -28,8 +29,8 @@ class _InputPageState extends State<InputPage> {
         w: stringController.text,
         startState: startStateController.text,
         finalState: finalStateController.text);
-    turingMachineManager.start();
-    print(turingMachineManager.accept);
+    accept = turingMachineManager.start();
+    setState(() {});
   }
 
   @override
@@ -110,17 +111,24 @@ class _InputPageState extends State<InputPage> {
               color: Colors.black,
             ))),
         Container(
-          width: 200,
+          width: 100,
           height: 100,
+          color: Colors.grey[200],
           child: MaterialButton(
             child: Text("Run"),
             onPressed: startProcess,
           ),
         ),
         Container(
-          width: 200,
+          width: 348,
           height: 100,
-          color: Colors.green,
+          color: accept ? Colors.green : Colors.red,
+          child: Center(
+            child: Text(
+              accept ? "String accepted" : "String not accepted",
+              style: const TextStyle(color: Colors.white, fontSize: 40),
+            ),
+          ),
         )
       ],
     );
