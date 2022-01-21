@@ -20,8 +20,9 @@ class TuringMachineManager {
     w.runes.forEach((element) {
       tape.add(String.fromCharCode(element));
     });
-    tape.add("BLANK");
-    tape.add("BLANK");
+    for (int i = 0; i < 100; i++) {
+      tape.add("BLANK");
+    }
   }
 
   bool start() {
